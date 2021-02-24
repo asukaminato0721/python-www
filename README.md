@@ -1,6 +1,6 @@
 # python-www
 
-Inspired by proxy-www
+Inspired by [justjavac/proxy-www](https://github.com/justjavac/proxy-www)
 
 ```py
 from typing import Callable
