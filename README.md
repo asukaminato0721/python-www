@@ -14,24 +14,23 @@ class WWW:
     def __repr__(self):
         return repr(self.name)
 
+    def get(self, *args: Callable):
+        res = requests.get(self.name)
+        for f in args:
+            f(res)
+
     def __getattr__(self, name):
-        if name == "com":
-            return get(f"{self.name}.com")
-        else:
-            return WWW(f"{self.name}.{name}")
+        return WWW(f"{self.name}.{name}")
 
-
-class get:
-    def __init__(self, web: str):
-        self.web = web
-        self.res = requests.get(web)
-
-    def get(self, func: Callable):
-        print(func(self.res))
+    def __div__(self, other):
+        return WWW(f"{self.name}/{other}")
 
 
 www = WWW()
-www.example.com.get(lambda x: x.status_code)
+www.example.com.get(
+    lambda x: print(x.status_code),
+    lambda x: print(x.headers["content-type"]),
+)
 ```
 
 Just for fun😉
