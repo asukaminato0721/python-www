@@ -22,9 +22,6 @@ class WWW:
     def __getattr__(self, name):
         return WWW(f"{self.name}.{name}")
 
-    def __div__(self, other):
-        return WWW(f"{self.name}/{other}")
-
 
 www = WWW()
 www.example.com.get(
